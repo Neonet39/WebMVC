@@ -1,8 +1,11 @@
 package com.controller;
 
 import com.repository.entity.Books;
+import com.security.test4.TokenUtils;
 import com.services.BooksService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +24,13 @@ public class ControllerHome {
     @Autowired
     BooksService booksServices;
 
+
+    @Autowired
+    UserDetailsService userDetails;
+
     @RequestMapping(method = RequestMethod.GET)
     public String index(ModelMap model) {
+
         LOG.info("got into the controller");
 
         List<Books> booksList = booksServices.getListBooks();

@@ -52,4 +52,14 @@ public class User {
     public void setRolle(Set<Rolle> rolle) {
         this.rolle = rolle;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", rolle=" + rolle +
+                '}';
+    }
 }

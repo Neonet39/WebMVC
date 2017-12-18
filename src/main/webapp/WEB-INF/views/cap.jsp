@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://www.springframework.org/tags"  prefix="spring"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <html>
 <head>
@@ -12,12 +13,16 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"><spring:message code="${cod}"/></a>
+                <c:if test="${not empty cod}" >
+                    <a class="navbar-brand" href="#"><spring:message code="${cod}"/></a>
+                </c:if>
+
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="?lang=en">en</a></li>
                     <li><a href="?lang=ru">ru</a></li>
+                    <li><a href="/logout">exit</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

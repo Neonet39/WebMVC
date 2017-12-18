@@ -32,9 +32,9 @@ public class UserDetailisServiceImpl implements UserDetailsService {
                 grantedAuthorities.add(new SimpleGrantedAuthority(role.getRolle()));
             }
         } catch (Exception e) {
-
            return null;
         }
+
         return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(),grantedAuthorities);
     }
 }

@@ -24,7 +24,7 @@ import java.util.Locale;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"com.controller", "com.services"})
-@Import({ AppSecurityConfig.class })
+@Import({ AppSecurityConfig.class,DataConfig.class })
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean

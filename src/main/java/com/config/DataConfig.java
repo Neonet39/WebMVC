@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("com.repository")
+@ComponentScan("com.repository.repositoryImpl")
 @PropertySource("classpath:app.properties")
 @EnableJpaRepositories("com.repository")
 public class DataConfig {
