@@ -1,5 +1,7 @@
 package com.repository.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,17 +17,6 @@ public class Autor {
 
     @Column(name = "first_name")
     private String firstName;
-
-    @ManyToMany(mappedBy = "autor")
-    private List<Books> booksList;
-
-    public List<Books> getBooksList() {
-        return booksList;
-    }
-
-    public void setBooksList(List<Books> booksList) {
-        this.booksList = booksList;
-    }
 
     public Long getId() {
         return id;

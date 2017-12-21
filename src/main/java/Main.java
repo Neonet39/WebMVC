@@ -1,8 +1,5 @@
-import com.config.AppSecurityConfig;
-import com.config.DataConfig;
 import com.config.WebConfig;
-import com.security.test4.TokenUtils;
-import com.services.BooksService;
+import com.config.security.token.TokenUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.security.core.userdetails.UserDetails;

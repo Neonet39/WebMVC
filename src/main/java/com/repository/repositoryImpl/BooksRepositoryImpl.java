@@ -2,6 +2,7 @@ package com.repository.repositoryImpl;
 
 import com.repository.BooksRepository;
 import com.repository.BooksRepositoryAdapt;
+import com.repository.entity.Autor;
 import com.repository.entity.Books;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +23,16 @@ public class BooksRepositoryImpl implements BooksRepositoryAdapt {
     @Autowired
     EntityManager entityManager;
 
-
     @Override
     public List<Books> findAll() {
         List<Books> booksList;
         try {
-            Query query = entityManager.createNativeQuery("SELECT * FROM books", Books.class);
-            booksList = query.getResultList();
+            Query query = entityManager.createNativeQuery("SELECT books.id,title,content,description,last_name,first_name FROM books join autor_books " +
+                    "on autor_books.books_id = books.id " +
+                    "join autor " +
+                    "on autor.id = autor_books.autor_id",Books.class);
+
+            booksList =  query.getResultList();
         } catch (Exception e) {
             LOG.error("Error retrieving books in method findAll()" + e);
             return null;

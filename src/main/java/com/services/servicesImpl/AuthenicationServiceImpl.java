@@ -1,8 +1,8 @@
 package com.services.servicesImpl;
 
 import com.model.UserLoginForm;
-import com.security.test4.TokenAuthentication;
-import com.security.test4.TokenUtils;
+import com.config.security.token.TokenAuthentication;
+import com.config.security.token.TokenUtils;
 import com.services.AuthenticationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

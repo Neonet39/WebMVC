@@ -1,9 +1,8 @@
-package com.security;
+package com.config.security;
 
 import com.repository.UserRepository;
 import com.repository.entity.Rolle;
 import com.repository.entity.User;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

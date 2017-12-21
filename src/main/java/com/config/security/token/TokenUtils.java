@@ -1,4 +1,4 @@
-package com.security.test4;
+package com.config.security.token;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.codec.Hex;

@@ -13,10 +13,6 @@
         <c:forEach var="books" items="${booksList}">
             ${books.title}<br>
             ${books.description}<br>
-
-            <c:forEach var="autor" items="${books.autor}">
-                <p>${autor.firstName} ${autor.lastName}</p>
-            </c:forEach>
             <a href="/getBook?id=${books.id}"><spring:message code="read"/></a>
             <br>
             <br>

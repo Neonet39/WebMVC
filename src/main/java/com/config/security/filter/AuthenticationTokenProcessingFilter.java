@@ -1,6 +1,8 @@
-package com.security.test4;
+package com.config.security.filter;
 
 
+import com.config.security.token.TokenAuthentication;
+import com.config.security.token.TokenUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
@@ -26,24 +29,23 @@ public class AuthenticationTokenProcessingFilter extends UsernamePasswordAuthent
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = this.getAsHttpRequest(request);
-
-       // "user:1513553969491:56abc11d0f906fd34722bbf830ba78a1";
         String authToken = this.extractAuthTokenFromRequest(httpRequest);
-
-        // httpServletRequest.setHeader("X-Auth-Token:",authToken);
-
         String userName = TokenUtils.getUserNameFromToken(authToken);
 
         if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
             UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-
             if (TokenUtils.validateToken(authToken, userDetails)) {
                 TokenAuthentication authentication =
                         new TokenAuthentication(userDetails, null, userDetails.getAuthorities());
                 authentication.setToken(authToken);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+        }
+
+        TokenAuthentication tokenAuthentication = (TokenAuthentication) SecurityContextHolder.getContext().getAuthentication();
+        if (tokenAuthentication != null) {
+            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+            httpServletResponse.setHeader("X-Auth-Token", tokenAuthentication.getToken());
         }
 
         chain.doFilter(request, response);
@@ -60,9 +62,7 @@ public class AuthenticationTokenProcessingFilter extends UsernamePasswordAuthent
 
 
     private String extractAuthTokenFromRequest(HttpServletRequest httpRequest) {
-
         String authToken = httpRequest.getHeader("X-Auth-Token");
-
         if (authToken == null) {
             authToken = httpRequest.getParameter("token");
         }
